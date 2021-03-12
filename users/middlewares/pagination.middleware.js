@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 function pagination(req, res, next) {
-  try{
+
     const page = parseInt(req.query.page) - 1;
     const limit = parseInt(req.query.limit);
   
@@ -9,7 +9,6 @@ function pagination(req, res, next) {
   
     User.findAndCountAll(
       {attributes: ['id', 'name', 'login', 'avatar'],
-        where: {id : id}, 
         order: [
           ['name', 'ASC'],
         ],
@@ -26,12 +25,6 @@ function pagination(req, res, next) {
         };
         res.send(response);
       });  
-  }catch(error) {
-    res.status(500).send({
-      message: "Error -> Can NOT complete a paging request!",
-      error: error.message,
-    });
-  }    
-}
+    }
 
 module.exports = pagination;

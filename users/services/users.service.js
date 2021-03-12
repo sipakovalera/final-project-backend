@@ -6,8 +6,30 @@ const User = require('../models/User');
 
 class UsersService {
 
-  get = async() => { 
-    return await User.findAll();
+  get = async(currentPage, currentLimit) => { 
+    const page = parseInt(currentPage) - 1;
+    const limit = parseInt(currentLimit);
+  
+    const offset = page ? page * limit : 0;
+  
+    return await User.findAndCountAll(
+      {attributes: ['id', 'name', 'login', 'avatar'],
+        order: [
+          ['name', 'ASC'],
+        ],
+        limit: limit, offset:offset })
+      .then(data => {
+        const totalPages = Math.ceil(data.count / limit);
+        const response = {
+              "totalUsers": data.count,
+              "totalPages": totalPages,
+              "limit": limit,
+              "currentPageNumber": page + 1,
+              "currentPageSize": data.rows.length,
+              "users": data.rows
+        };
+        return response
+      });
   }
 
   getOne = async(id) => { 

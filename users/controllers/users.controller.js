@@ -1,13 +1,18 @@
-const { required } = require('joi');
 const usersService = require('../services/users.service');
 class UsersController {
   service = usersService;
 
   get = async ( req, res, next ) => {
-    res
-      .status(200)
-      .json(await this.service.get())
-  };
+    try {
+      const result = await this.service.get(req.query.page, req.query.limit)
+       res.status(200).json(result)
+     } catch(error) {
+        res.status(500).send({
+        message: "Error -> Can NOT complete a paging request!",
+        error: error.message,
+      });
+     }
+   }
 
   getOne = async ( req, res, next ) => {
     res
