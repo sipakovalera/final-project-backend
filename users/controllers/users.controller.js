@@ -1,10 +1,11 @@
+const User = require('../models/User');
 const usersService = require('../services/users.service');
 class UsersController {
   service = usersService;
 
   get = async ( req, res, next ) => {
     try {
-      const result = await this.service.get(req.query.page, req.query.limit)
+      const result = await this.service.get(req.query.page, req.query.limit, req.query.sortBy)
        res.status(200).json(result)
      } catch(error) {
         res.status(500).send({

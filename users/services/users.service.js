@@ -3,21 +3,55 @@ const bcrypt = require('bcrypt');
 const { secret } = require('../config/key');
 const User = require('../models/User');
 
-
 class UsersService {
 
-  get = async(currentPage, currentLimit) => { 
+  get = async(currentPage, currentLimit, sortBy) => {
+     
     const page = parseInt(currentPage) - 1;
     const limit = parseInt(currentLimit);
-  
     const offset = page ? page * limit : 0;
-  
+
+    if(sortBy === 'name'){
+      return await User.findAndCountAll({
+        limit: limit, 
+        offset: offset,
+        order: [['name', 'ASC']] 
+      })
+      .then(data => {
+        const totalPages = Math.ceil(data.count / limit);
+        const response = {
+              "totalUsers": data.count,
+              "totalPages": totalPages,
+              "users": data.rows
+        };
+        return response
+      });
+    }
+
+    if(sortBy === 'last'){
+      return await User.findAndCountAll({
+        limit: limit, 
+        offset: offset, 
+        order: [['id', 'DESC']] 
+      })
+      .then(data => {
+        const totalPages = Math.ceil(data.count / limit);
+        const response = {
+              "totalUsers": data.count,
+              "totalPages": totalPages,
+              "users": data.rows
+        };
+        return response
+      });
+    }
+
     return await User.findAndCountAll(
-      {attributes: ['id', 'name', 'login', 'avatar'],
-        order: [
-          ['name', 'ASC'],
-        ],
-        limit: limit, offset:offset })
+      {
+        attributes: ['id', 'name', 'login', 'avatar'], 
+        limit: limit, 
+        offset: offset,
+        
+      })
       .then(data => {
         const totalPages = Math.ceil(data.count / limit);
         const response = {

@@ -32,5 +32,11 @@ const User = sequelizeDB.define('User', {
     timestamps: false
 });
 
+User.associate = models => {
+  User.hasMany(models.Friend, {
+      as: 'friends',
+      foreignKey: 'userId'
+  });
+};
 
 module.exports = User;
