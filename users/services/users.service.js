@@ -5,14 +5,36 @@ const User = require('../models/User');
 
 class UsersService {
 
-  get = async(currentPage, currentLimit, sortBy) => {
+  get = async(currentPage, currentLimit, sortBy, filter) => {
      
     const page = parseInt(currentPage) - 1;
     const limit = parseInt(currentLimit);
     const offset = page ? page * limit : 0;
+    const { Op } = require('sequelize')
+
+    if(filter === 'avatar'){
+      return await User.findAndCountAll({
+        attributes: ['id', 'name', 'login', 'avatar'], 
+        limit: limit, 
+        offset: offset,
+        where: {
+          "avatar": {[Op.ne]: ""}
+        }
+      })
+      .then(data => {
+        const totalPages = Math.ceil(data.count / limit);
+        const response = {
+              "totalUsers": data.count,
+              "totalPages": totalPages,
+              "users": data.rows
+        };
+        return response
+      });
+    }
 
     if(sortBy === 'name'){
       return await User.findAndCountAll({
+        attributes: ['id', 'name', 'login', 'avatar'], 
         limit: limit, 
         offset: offset,
         order: [['name', 'ASC']] 
@@ -30,6 +52,7 @@ class UsersService {
 
     if(sortBy === 'last'){
       return await User.findAndCountAll({
+        attributes: ['id', 'name', 'login', 'avatar'], 
         limit: limit, 
         offset: offset, 
         order: [['id', 'DESC']] 
