@@ -27,6 +27,12 @@ class UsersController {
       .json(await this.service.getFriends(req.params.id))
   }
 
+  getFriend = async ( req, res, next ) => {
+    res
+      .status(200)
+      .json(await this.service.getFriend(req.body.friendId))
+  };
+
   add = async ( req, res, next ) => {
     res
       .status(200)
@@ -36,7 +42,7 @@ class UsersController {
   addFriend = async ( req, res, next ) => {
     res
       .status(200)
-      .json(await this.service.addFriend(req.body))
+      .json(await this.service.addFriend(req.params.id, req.body))
   };
 
   update = async ( req, res, next ) => {

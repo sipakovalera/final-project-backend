@@ -12,7 +12,6 @@ const Friends = sequelizeDB.define(
     friendId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
       allowNull: false
     },
   },

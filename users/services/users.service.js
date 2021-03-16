@@ -98,6 +98,10 @@ class UsersService {
     return await Friends.findAll({where: {userId: id}})
   }
 
+  getFriend = async(friendId) => { 
+    return await User.findAll({where:{ id : friendId }});
+  }
+
   add = async(user) => {
     const salt = await bcrypt.genSalt(10);
     return await User.create({
@@ -109,11 +113,14 @@ class UsersService {
     })
   }
 
-  addFriend = async(user) => {
+  addFriend = async(id, friend) => {
     return await Friends.create({
-      userId: user.userId,
-      friendId: user.friendId
-      
+      userId: friend.userId,
+      friendId: friend.friendId
+    }, {
+      where: {
+        id: id
+      }
     })
   }
 

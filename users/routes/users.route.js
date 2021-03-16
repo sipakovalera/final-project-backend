@@ -11,6 +11,7 @@ router
   .get('/', controller.get )
   .get('/:id', controller.getOne )
   .get('/:id/friends', controller.getFriends )
+  .put('/friends', controller.getFriend)
   .post('/:id/friend', controller.addFriend )
   .post('/register', validate(createUserSchema), controller.add )
   .delete('/:id', controller.delete)
