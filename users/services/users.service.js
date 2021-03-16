@@ -95,7 +95,7 @@ class UsersService {
   }
 
   getFriends = async(id) => {
-    return await Friends.findAll({where: {id: id}})
+    return await Friends.findAll({where: {userId: id}})
   }
 
   add = async(user) => {
@@ -110,7 +110,7 @@ class UsersService {
   }
 
   addFriend = async(user) => {
-    return await User.Friends.create({
+    return await Friends.create({
       userId: user.userId,
       friendId: user.friendId
       
