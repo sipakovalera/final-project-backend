@@ -26,14 +26,13 @@ const User = sequelizeDB.define('User', {
 
   avatar: {
     type: DataTypes.STRING
-  }
-
+  },
 }, {
     timestamps: false
 });
 
 User.associate = models => {
-  User.hasMany(models.Friend, {
+  User.hasMany(models.Friends, {
       as: 'friends',
       foreignKey: 'userId'
   });

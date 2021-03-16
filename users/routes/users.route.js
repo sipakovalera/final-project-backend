@@ -10,6 +10,8 @@ const updateUserSchema = require('../validation-schemas/update-user.schema');
 router
   .get('/', controller.get )
   .get('/:id', controller.getOne )
+  .get('/:id/friends', controller.getFriends )
+  .post('/:id/friend', controller.addFriend )
   .post('/register', validate(createUserSchema), controller.add )
   .delete('/:id', controller.delete)
   .post('/avatar/:id', upload, controller.avatar)

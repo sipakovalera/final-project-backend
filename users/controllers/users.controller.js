@@ -21,10 +21,22 @@ class UsersController {
       .json(await this.service.getOne(req.params.id))
   };
 
+  getFriends = async ( req, res, next ) => {
+    res
+      .status(200)
+      .json(await this.service.getFriends(req.params.id))
+  }
+
   add = async ( req, res, next ) => {
     res
       .status(200)
       .json(await this.service.add(req.body))
+  };
+
+  addFriend = async ( req, res, next ) => {
+    res
+      .status(200)
+      .json(await this.service.addFriend(req.body))
   };
 
   update = async ( req, res, next ) => {

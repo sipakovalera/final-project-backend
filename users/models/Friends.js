@@ -1,13 +1,12 @@
 const { DataTypes } = require('sequelize');
 const sequelizeDB = require('./connection');
 
-const Friend = sequelizeDB.define(
-  'Friend',
+const Friends = sequelizeDB.define(
+  'Friends',
   {
     userId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
       allowNull: false
     },
     friendId: {
@@ -17,13 +16,18 @@ const Friend = sequelizeDB.define(
       allowNull: false
     },
   },
+  { 
+    freezeTableName: true 
+  }, {
+    timestamps: false
+  }
 );
 
-Friend.associate = models => {
-  Friend.belongsTo(models.User, {
-      as: 'friend',
+Friends.associate = models => {
+  Friends.belongsTo(models.User, {
+      as: 'friends',
       foreignKey: 'userId'
   });
 };
 
-module.exports = Friend;
+module.exports = Friends;

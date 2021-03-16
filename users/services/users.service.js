@@ -2,6 +2,8 @@ const jwt  = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { secret } = require('../config/key');
 const User = require('../models/User');
+const Friends = require('../models/Friends');
+const { Op, where } = require('sequelize')
 
 class UsersService {
 
@@ -10,7 +12,6 @@ class UsersService {
     const page = parseInt(currentPage) - 1;
     const limit = parseInt(currentLimit);
     const offset = page ? page * limit : 0;
-    const { Op } = require('sequelize')
 
     if(filter === 'avatar'){
       return await User.findAndCountAll({
@@ -93,6 +94,10 @@ class UsersService {
     return await User.findOne({where:{ id : id }});
   }
 
+  getFriends = async(id) => {
+    return await Friends.findAll({where: {id: id}})
+  }
+
   add = async(user) => {
     const salt = await bcrypt.genSalt(10);
     return await User.create({
@@ -101,6 +106,14 @@ class UsersService {
       login: user.login,
       password:await bcrypt.hash(user.password, salt),
       avatar: user.avatar
+    })
+  }
+
+  addFriend = async(user) => {
+    return await User.Friends.create({
+      userId: user.userId,
+      friendId: user.friendId
+      
     })
   }
 
