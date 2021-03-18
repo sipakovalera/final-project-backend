@@ -2,14 +2,16 @@
   "name": "express-js-server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
-    "serve": "nodemon app.js",
-    "start": "node app.js"
+    "serve": "nodemon app.ts",
+    "start": "node app.ts",
+    "winston": "node utils/logger.ts"
   },
   "author": "Sipakova Valeryia",
   "license": "ISC",
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -22,9 +24,15 @@
     "mysql2": "^2.2.5",
     "sequelize": "^6.4.0",
     "sequelize-cli": "^6.2.0",
-    "uuid": "^8.3.2"
+    "ts-node": "^9.1.1",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.35",
+    "nodemon": "^2.0.7",
+    "typescript": "^4.2.3"
   }
 }

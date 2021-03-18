@@ -16,6 +16,7 @@ sequelizeDB
   })
   .catch(err => {
     console.error('Unable to connect to the DATABASE:', err);
+   
   });
 
 module.exports = sequelizeDB;

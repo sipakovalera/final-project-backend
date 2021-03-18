@@ -16,63 +16,113 @@ class UsersController {
    }
 
   getOne = async ( req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .json(await this.service.getOne(req.params.id))
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   getFriends = async ( req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .json(await this.service.getFriends(req.params.id))
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   }
 
   getFriend = async ( req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .json(await this.service.getFriend(req.body.friendId))
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   add = async ( req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .json(await this.service.add(req.body))
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   addFriend = async ( req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .json(await this.service.addFriend(req.params.id, req.body))
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   update = async ( req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .json(await this.service.update(req.body, req.params.id, req.file));
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   avatar = async ( req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .json(await this.service.avatar(req.body, req.params.id, req.file));
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
+  };
+
+  updatePassword = async ( req, res, next ) => {
+    try {
+      res
+      .status(200)
+      .json(await this.service.updatePassword(req.body.password));
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   delete = (req, res, next ) => {
-    res
+    try { 
+      res
       .status(200)
       .send(this.service.delete(req.params.id));
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   deleteFriend = (req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .send(this.service.deleteFriend(req.params.id));
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
 
   login = async (req, res, next ) => {
-    res
+    try {
+      res
       .status(200)
       .send(await this.service.login(req.body.login, req.body.password));
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
   };
   
 }

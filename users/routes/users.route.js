@@ -8,7 +8,7 @@ const createUserSchema = require('../validation-schemas/create-user.schema');
 const updateUserSchema = require('../validation-schemas/update-user.schema');
 
 router
-  .get('/', controller.get )
+  .get('/', auth, controller.get )
   .get('/:id', controller.getOne )
   .get('/:id/friends', controller.getFriends )
   .put('/friends', controller.getFriend)
@@ -18,6 +18,7 @@ router
   .delete('/:id/remove', controller.deleteFriend)
   .post('/avatar/:id', upload, controller.avatar)
   .put('/:id', validate(updateUserSchema), controller.update)
+  .put('/:id/password', validate(updateUserSchema), controller.updatePassword)
   .post('/login', controller.login);
   
 module.exports = router;

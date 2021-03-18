@@ -133,6 +133,15 @@ class UsersService {
       return updateUser;
     }
 
+  updatePassword = async (password, id) => {
+    const newPassword = await bcrypt.hash(password, 10);
+    return await User.update(newPassword, {
+      where: {
+        id: id
+      }
+    });
+  }
+
  avatar = async (updateUser, id, file) => {
    updateUser.avatar = file.filename;
     updateUser = await User.update(updateUser, { 
