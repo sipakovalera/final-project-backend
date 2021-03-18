@@ -151,6 +151,14 @@ class UsersService {
     })
   }
 
+  deleteFriend = async(id) => {
+    return await Friends.destroy({
+      where: {
+        friendId: id
+      }
+    })
+  }
+
   login = async (login, password) => {
     const user = await User.findOne({where:{ login : login }});
       if (!user){

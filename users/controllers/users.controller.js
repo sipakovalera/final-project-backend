@@ -63,6 +63,12 @@ class UsersController {
       .send(this.service.delete(req.params.id));
   };
 
+  deleteFriend = (req, res, next ) => {
+    res
+      .status(200)
+      .send(this.service.deleteFriend(req.params.id));
+  };
+
   login = async (req, res, next ) => {
     res
       .status(200)

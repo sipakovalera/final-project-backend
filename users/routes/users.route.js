@@ -15,6 +15,7 @@ router
   .post('/:id/friend', controller.addFriend )
   .post('/register', validate(createUserSchema), controller.add )
   .delete('/:id', controller.delete)
+  .delete('/:id/remove', controller.deleteFriend)
   .post('/avatar/:id', upload, controller.avatar)
   .put('/:id', validate(updateUserSchema), controller.update)
   .post('/login', controller.login);
