@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const logger = require('../../utils/logger');
 
 const sequelizeDB = new Sequelize("users", "root", "default", {
   dialect: 'mysql',
@@ -16,7 +17,7 @@ sequelizeDB
   })
   .catch(err => {
     console.error('Unable to connect to the DATABASE:', err);
-   
+    logger.error('Cannot connet to database')
   });
 
 module.exports = sequelizeDB;

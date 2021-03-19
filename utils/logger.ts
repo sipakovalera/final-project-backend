@@ -14,7 +14,7 @@ module.exports = createLogger({
   transports: [
     new transports.File({ 
       filename: 'logs/error.log', 
-      level: 'error'}),
+      level: 'error' }),
     new transports.File({ filename: 'logs/server.log' })
   ],
 });
