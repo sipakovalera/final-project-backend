@@ -85,6 +85,16 @@ class UsersController {
     }
   };
 
+  removeAvatar = async ( req, res, next ) => {
+    try {
+      res
+      .status(200)
+      .json(await this.service.removeAvatar(req.params.id));
+    } catch(e) {
+      res.status(400).send({ error: e.message });
+    }
+  };
+
   updatePassword = async ( req, res, next ) => {
     try {
       res
