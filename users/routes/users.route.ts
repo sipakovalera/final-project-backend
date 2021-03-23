@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 const controller = require('../controllers/users.controller');
 const auth = require('../middlewares/auth.middleware');
@@ -20,6 +20,6 @@ router
   .post('/avatar/:id', upload, controller.avatar)
   .put('/:id', auth, validate(updateUserSchema), controller.update)
   .put('/:id/password', auth, validate(updateUserSchema), controller.updatePassword)
-  .post('/login', auth, controller.login);
+  .post('/login', controller.login);
   
-module.exports = router;
+ export default router;
