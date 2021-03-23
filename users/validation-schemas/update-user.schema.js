@@ -12,7 +12,7 @@ const updateUserSchema = Joi.object({
     login: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: true } }),
     
-    avatar: Joi.string()
+    avatar: null
 });
 
 module.exports = updateUserSchema;

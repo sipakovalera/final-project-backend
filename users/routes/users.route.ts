@@ -16,7 +16,6 @@ router
   .post('/register', validate(createUserSchema), controller.add )
   .delete('/:id', auth, controller.delete)
   .delete('/:id/remove', auth, controller.deleteFriend)
-  .put('/remove/avatar/:id', controller.removeAvatar)
   .post('/avatar/:id', upload, controller.avatar)
   .put('/:id', auth, validate(updateUserSchema), controller.update)
   .put('/:id/password', auth, validate(updateUserSchema), controller.updatePassword)

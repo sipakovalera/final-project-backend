@@ -152,11 +152,6 @@ class UsersService {
       return updateUser;
   }
 
-  removeAvatar = async (id) => {
-    currentUser = await User.findOne({where: {id: id}})
-    return await currentUser.avatar.destroy({where: {avatar: avatar}})
-  }
-
   delete = async(id) => {
     return await User.destroy({
       where: {
