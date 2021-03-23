@@ -9,16 +9,17 @@ const updateUserSchema = require('../validation-schemas/update-user.schema');
 
 router
   .get('/', auth, controller.get )
-  .get('/:id', controller.getOne )
-  .get('/:id/friends', controller.getFriends )
-  .put('/friends', controller.getFriend)
+  .get('/:id', auth, controller.getOne )
+  .get('/:id/friends', auth, controller.getFriends )
+  .put('/friends', auth, controller.getFriend)
   .post('/:id/friend', controller.addFriend )
   .post('/register', validate(createUserSchema), controller.add )
-  .delete('/:id', controller.delete)
-  .delete('/:id/remove', controller.deleteFriend)
+  .delete('/:id', auth, controller.delete)
+  .delete('/:id/remove', auth, controller.deleteFriend)
+  .put('/remove/avatar/:id', controller.removeAvatar)
   .post('/avatar/:id', upload, controller.avatar)
-  .put('/:id', validate(updateUserSchema), controller.update)
-  .put('/:id/password', validate(updateUserSchema), controller.updatePassword)
-  .post('/login', controller.login);
+  .put('/:id', auth, validate(updateUserSchema), controller.update)
+  .put('/:id/password', auth, validate(updateUserSchema), controller.updatePassword)
+  .post('/login', auth, controller.login);
   
 module.exports = router;
