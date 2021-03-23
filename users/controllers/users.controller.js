@@ -6,7 +6,7 @@ class UsersController {
   get = async ( req, res, next ) => {
     try {
       const result = await this.service.get(req.query.page, req.query.limit, req.query.sortBy, req.query.filter)
-       res.status(200).json(result)
+      res.status(200).json(result)
      } catch(error) {
         res.status(500).send({
         message: "Error -> Can NOT complete a paging request!",

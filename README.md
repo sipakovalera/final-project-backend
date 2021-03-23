@@ -5,10 +5,8 @@
 ## Description
 
 folder users - Social network project.
-
-folder dist - js compilation of Social network project.
-
 folder logs - error logging. 
+folder utils - winston rules.
 
 ## Installation
 

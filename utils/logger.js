@@ -1,6 +1,6 @@
 const { createLogger, format, transports } = require('winston');
 
-export default createLogger({
+module.exports = createLogger({
   level: 'info',
   format: format.combine(
     format.timestamp({

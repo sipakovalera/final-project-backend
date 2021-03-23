@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require("express");
 const router = express.Router();
 const controller = require('../controllers/users.controller');
 const auth = require('../middlewares/auth.middleware');
@@ -21,4 +21,4 @@ router
   .put('/:id/password', auth, validate(updateUserSchema), controller.updatePassword)
   .post('/login', controller.login);
   
- export default router;
+ module.exports = router;
